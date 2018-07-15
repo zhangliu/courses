@@ -10,11 +10,11 @@ def genData():
   labels = ['love', 'love', 'love', 'action', 'action', 'action']
   return points, labels
 
-def classify(intx, data, labels, k):
+def classify(point, data, labels, k):
   size = data.shape[0]
 
   # 计算距离
-  diffMat = np.tile(intx, (size, 1)) - data
+  diffMat = np.tile(point, (size, 1)) - data
   sqDiffMat = diffMat ** 2
   sqDistances = sqDiffMat.sum(axis=1)
   distances = sqDistances ** 0.5
