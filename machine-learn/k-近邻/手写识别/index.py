@@ -4,6 +4,7 @@ import numpy as np
 # import struct
 import matplotlib.pyplot as plt
 import PIL as pil
+import operator
 
 imgFile = './t10k-images-idx3-ubyte'
 labelFile = './t10k-labels-idx1-ubyte'
@@ -29,7 +30,7 @@ def load_images(imgFile, labelFile, sampleImgFile):
     for j in range(height):
       sampleImg.append(imgInfo[i][j].sum())
 
-  return images, labels, np.array(sampleImg)
+  return images, labels, sampleImg
 
 # print load_images(imgFile, labelFile, sampleImgFile)
 
@@ -48,4 +49,26 @@ def print_img():
 
 # print print_img()
 
+def classify(point, data, labels, k):
+  size = data.shape[0]
+
+  # 计算距离
+  diffMat = np.tile(point, (size, 1)) - data
+  sqDiffMat = diffMat ** 2
+  sqDistances = sqDiffMat.sum(axis=1)
+  distances = sqDistances ** 0.5
+  sortedDistances = distances.argsort()
+
+  # 选择距离最小的k个点
+  classCount = {}
+  for i in range(k): 
+    label = labels[sortedDistances[i]]
+    classCount[label] = classCount.get(label, 0) + 1
+
+  sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reverse=True)
+  return sortedClassCount[0][0]
+
+images, labels, sampleImg = load_images(imgFile, labelFile, sampleImgFile)
+
+print classify(sampleImg, images, labels, 10)
 
