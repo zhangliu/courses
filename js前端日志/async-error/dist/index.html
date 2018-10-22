@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>title</title>
+  </head>
+  <body>
+    <script>
+        // document.write("<script src='http://qdev.qunarzz.com:8080/index.js?time=" + Date.now() + "' crossorigin='anonymous'><\/script>")
+        // document.write("<script src='./index.js?time=" + Date.now() + "'><\/script>")
+          document.write("<script src='./index.js?time=" + Date.now() + "'><\/script>")
+        // document.write("<script src='./prod.js?time=" + Date.now() + "'><\/script>")
+        // document.write("<script src='./prod_sourceMap.js?time=" + Date.now() + "'><\/script>")
+        // window.onerror = console.log
+        window.onunhandledrejection = e => console.log(e)
+    </script>
+  </body>
+</html>
