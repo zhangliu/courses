@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <script>
+  function say() {
+    let xmlhttp;
+    if (window.XMLHttpRequest) {
+      //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+      xmlhttp = new XMLHttpRequest();
+    } else {
+      // IE6, IE5 浏览器执行代码
+      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    xmlhttp.onreadystatechange = function() {
+      let stateText
+      switch(xmlhttp.readyState) {
+        case 0: 
+          stateText = '初始状态，请求还未发起'
+          break
+        case 1: 
+          stateText = '已发发送请求，等待响应'
+          break
+        case 2: 
+          stateText = '已获取响应头，开始获取响应体'
+          break
+        case 3: 
+          stateText = '正在下载响应体'
+          break
+        case 4: 
+          stateText = '整个请求过程结束'
+          break
+      }
+      console.log('readyState is:', xmlhttp.readyState, stateText)
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        document.getElementById('content').innerHTML = xmlhttp.responseText;
+      }
+    }
+
+    xmlhttp.onloadstart = function() {
+      console.log('onloadstart event happend!')
+    }
+    xmlhttp.onprogress = function(e) {
+      console.log('onprogress event happend! has load:', e.loaded)
+    }
+    xmlhttp.onload = function() {
+      console.log('onload event happend! res is success')
+    }
+    xmlhttp.onloadend = function() {
+      console.log('onloadend event happend! res is end')
+    }
+
+    xmlhttp.open('GET', 'http://127.0.0.1:8081/hello',true);
+    xmlhttp.send();
+  }
+  </script>
+</head>
+<body>
+  <div>我想对世界说：<span id='content'></span></div>
+  <button type='button' onclick='say()'>get say</button>
+</body>
+</html>
