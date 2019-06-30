@@ -42,7 +42,7 @@
       console.log('onloadstart event happend!')
     }
     xmlhttp.onprogress = function(e) {
-      console.log('onprogress event happend! has load:', e.loaded)
+      console.log('onprogress event happend! has load:', e.loaded, e)
     }
     xmlhttp.onload = function() {
       console.log('onload event happend! res is success')
@@ -51,7 +51,7 @@
       console.log('onloadend event happend! res is end')
     }
 
-    xmlhttp.open('GET', 'http://127.0.0.1:8081/hello',true);
+    xmlhttp.open('GET', 'http://127.0.0.1:8081/onload',true);
     xmlhttp.send();
   }
   </script>

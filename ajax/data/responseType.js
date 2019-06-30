@@ -1,0 +1,1 @@
+module.exports = { helloWrold: 'hello world'}
