@@ -8,6 +8,7 @@ function getPeople(name?: string) {
 
 getPeople('zhangsan')
 getPeople(undefined)
+getPeople(null)
 
 // any
 let school: any

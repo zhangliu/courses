@@ -1,6 +1,6 @@
 let width: number
 
-width = getWidth()
+// width = getWidth()
 
 if (width === undefined) {
   // ...
